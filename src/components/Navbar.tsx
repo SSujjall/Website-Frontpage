@@ -35,8 +35,8 @@ const Navbar: React.FC = () => {
         ${isTop ? "bg-transparent" : "bg-white shadow-md"}`}
     >
       {/* Logo */}
-      <Link smooth={true} to="home">
-        <img src="/images/Logo.png" className="w-20" alt="Logo" />
+      <Link smooth={true} to="home" className="w-20 p-4">
+        <img src="/Logo.svg" className="cursor-pointer" alt="Logo" />
       </Link>
 
       {/* Hamburger icon for mobile */}
