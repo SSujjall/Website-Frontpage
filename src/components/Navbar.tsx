@@ -1,6 +1,6 @@
-// Navbar.tsx
 import { useEffect, useState } from "react";
 import NavLink from "./NavLink";
+import HamburgerMenu from "./HamburgerMenu"; // Import the new component
 import "@fortawesome/fontawesome-free/css/all.min.css"; // Import FontAwesome styles
 import { Link } from "react-scroll";
 
@@ -20,11 +20,19 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Define an array of nav links
+  const navLinks = [
+    { to: "home", text: "Home" },
+    { to: "aboutUs", text: "About Us" },
+    { to: "services", text: "Services" },
+    { to: "contactUs", text: "Contact" },
+  ];
+
   return (
     <nav
-      className={`fixed rounded-xl top-0 left-0 w-full flex items-center justify-between p-4 pl-10 pr-10 z-50 transition-colors duration-300 ${
-        isTop ? "bg-transparent" : "bg-white shadow-md"
-      }`}
+      className={`fixed rounded-xl h-20 top-2 left-0 right-0 mx-auto w-11/12 flex
+        items-center justify-between p-4 pl-10 pr-10 z-50 transition-colors duration-300 
+        ${isTop ? "bg-transparent" : "bg-white shadow-md"}`}
     >
       {/* Logo */}
       <Link smooth={true} to="home">
@@ -33,47 +41,31 @@ const Navbar: React.FC = () => {
 
       {/* Hamburger icon for mobile */}
       <i
-        className={`fa fa-bars text-2xl md:hidden cursor-pointer transition-colors duration-300 ${
-          isTop ? "text-white" : "text-black"
-        }`}
+        className={`fa fa-bars text-3xl md:hidden cursor-pointer transition-colors duration-300 ${isTop ? "text-white" : "text-black"
+          }`}
         onClick={toggleMenu}
       ></i>
 
-      {/* Links */}
-      <div
-        className={`fixed top-0 right-0 h-full bg-white p-4 transform ${
-          navOpen ? "translate-x-0" : "translate-x-full"
-        } transition-transform duration-500 md:static md:bg-transparent md:transform-none md:h-auto md:p-0`}
-      >
-        {/* Close button for mobile */}
-        <i
-          className="fa fa-window-close md:hidden text-xl cursor-pointer"
-          onClick={toggleMenu}
-        ></i>
-
-        {/* Nav Links */}
+      {/* Links for larger screens */}
+      <div className="hidden md:flex  md:space-x-8">
         <ul className="md:flex md:space-x-8">
-          <NavLink to="home" text="Home" onClick={toggleMenu} isTop={isTop} />
-          <NavLink
-            to="aboutUs"
-            text="About Us"
-            onClick={toggleMenu}
-            isTop={isTop}
-          />
-          <NavLink
-            to="services"
-            text="Services"
-            onClick={toggleMenu}
-            isTop={isTop}
-          />
-          <NavLink
-            to="contactUs"
-            text="Contact"
-            onClick={toggleMenu}
-            isTop={isTop}
-          />
+          {navLinks.map((link) => (
+            <NavLink
+              key={link.to}
+              to={link.to}
+              text={link.text}
+              isTop={isTop}
+            />
+          ))}
         </ul>
       </div>
+
+      {/* Hamburger Menu */}
+      <HamburgerMenu
+        navLinks={navLinks} // Pass the nav links to the hamburger menu
+        isOpen={navOpen} // Control the open state
+        onClose={toggleMenu} // Close function
+      />
     </nav>
   );
 };

@@ -16,11 +16,10 @@ const NavLink: React.FC<NavLinkProps> = ({ to, text, onClick, isTop }) => {
         smooth={true}
         duration={500}
         spy={true}
-        offset={-60}
+        offset={-88}
         onClick={onClick}
-        className={`cursor-pointer text-xl transition-colors ${
-          isTop ? "text-black" : "text-black"
-        } hover:text-cyan-600`}
+        className={`cursor-pointer text-3xl transition-colors ${isTop ? "text-black" : "text-black"
+          } hover:text-cyan-600`}
       >
         {text}
       </Link>
