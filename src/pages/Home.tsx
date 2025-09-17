@@ -1,9 +1,8 @@
-import Navbar from "../components/Navbar";
+
 
 export const Home = () => {
   return (
     <div>
-      <Navbar />
       <section id="home" className="min-h-screen bg-blue-100">
         <h1 className="text-center text-4xl py-24">Home Section</h1>
       </section>
